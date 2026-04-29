@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import "../app/globals.css";
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
 
 // Tailwind config — tambahkan ini ke tailwind.config.js jika pakai Vite/CRA:
 // colors: { hijau: { 50:'#f0fdf4', ... } }
@@ -157,7 +158,7 @@ const posFeatures = [
 const steps = [
   {
     num: "01",
-    title: "Daftar Gratis",
+    title: "Daftar Sekarang",
     desc: "Buat akun dalam 2 menit, tanpa kartu kredit, langsung bisa dipakai.",
   },
   {
@@ -178,34 +179,34 @@ const steps = [
 ];
 
 const plans = [
-  {
-    name: "Gratis",
-    price: "Rp0",
-    per: "selamanya",
-    features: [
-      "1 kasir POS",
-      "100 transaksi/bulan",
-      "Laporan mingguan",
-      "Notifikasi stok",
-      "10 tiket servis/bulan",
-    ],
-    cta: "Mulai Gratis",
-    featured: false,
-  },
+  // {
+  //   name: "Gratis",
+  //   price: "Rp0",
+  //   per: "selamanya",
+  //   features: [
+  //     "1 kasir POS",
+  //     "100 transaksi/bulan",
+  //     "Laporan mingguan",
+  //     "Notifikasi stok",
+  //     "10 tiket servis/bulan",
+  //   ],
+  //   cta: "Mulai Gratis",
+  //   featured: false,
+  // },
   {
     name: "Pro",
-    price: "Rp49.000",
+    price: "Rp36.000",
     per: "per bulan",
     features: [
-      "5 kasir POS",
+      "Kasir POS",
       "Transaksi tidak terbatas",
-      "Multi metode bayar & QRIS",
+      // "Multi metode bayar & QRIS",
       "Laporan real-time",
       "Servis HP tidak terbatas",
       "Struk WA & cetak thermal",
       "Dukungan prioritas",
     ],
-    cta: "Coba 14 Hari Gratis",
+    cta: "Coba Sekarang",
     featured: true,
   },
   //   {
@@ -252,6 +253,7 @@ export default function LandingPage() {
   const [count1, setCount1] = useState(0);
   const [count2, setCount2] = useState(0);
   const [count3, setCount3] = useState(0);
+  const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setActiveNav(window.scrollY > 40);
@@ -317,15 +319,85 @@ export default function LandingPage() {
               </a>
             ))}
           </div>
-          <Link
-            href={`https://api.whatsapp.com/send?phone=62859102604165`}
-            className="btn-primary text-white text-sm font-semibold px-5 py-2"
-            style={{ borderRadius: 12 }}
-          >
-            Coba Gratis →
-          </Link>
+          <div className="flex gap-x-2">
+            <Link
+              href={`https://api.whatsapp.com/send?phone=62859102604165`}
+              className="btn-primary text-white text-sm font-semibold px-5 py-2"
+              style={{ borderRadius: 12 }}
+            >
+              Coba →
+            </Link>
+            <button
+              onClick={() => setOpenMenu(true)}
+              className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg
+  bg-white/10 hover:bg-white/20 transition"
+            >
+              <Menu size={18} color="#86efac" />
+            </button>
+          </div>
         </div>
       </nav>
+
+      {openMenu && (
+        <div className="fixed inset-0 z-50">
+          {/* BACKDROP */}
+          <div
+            className="absolute inset-0 bg-black/70"
+            onClick={() => setOpenMenu(false)}
+          />
+
+          {/* SIDEBAR */}
+          <div
+            className="absolute top-0 right-0 h-full w-[75%] max-w-xs
+      bg-[#0D0D10] border-l border-[#1f1f2e]
+      p-5 flex flex-col gap-5
+      animate-slideIn"
+          >
+            {/* HEADER */}
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-semibold text-green-300">Menu</span>
+
+              <button
+                onClick={() => setOpenMenu(false)}
+                className="w-8 h-8 flex items-center justify-center rounded-lg
+          bg-white/10 hover:bg-white/20"
+              >
+                <X size={16} color="#86efac" />
+              </button>
+            </div>
+
+            {/* MENU */}
+            <div className="flex flex-col gap-3 text-sm text-green-200">
+              {[
+                ["fitur", "Fitur"],
+                ["pos", "POS Kasir"],
+                ["servis-hp", "Servis HP"],
+                ["cara-kerja", "Cara Kerja"],
+                ["harga", "Harga"],
+                ["testimoni", "Testimoni"],
+              ].map(([id, label]) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={() => setOpenMenu(false)}
+                  className="py-2 px-2 rounded-lg hover:bg-white/10 transition"
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <a
+              href="https://api.whatsapp.com/send?phone=62859102604165"
+              className="mt-auto text-center py-2 rounded-xl
+        bg-green-500 text-black font-semibold"
+            >
+              Coba Sekarang →
+            </a>
+          </div>
+        </div>
+      )}
 
       {/* ── HERO ── */}
       <section className="hero-bg min-h-screen flex items-center pt-20">
@@ -398,7 +470,7 @@ export default function LandingPage() {
                 className="btn-primary text-white font-bold px-7 py-3"
                 style={{ borderRadius: 12, fontSize: 15 }}
               >
-                Mulai Gratis Sekarang
+                Mulai Sekarang
               </Link>
               <button
                 style={{
@@ -420,7 +492,7 @@ export default function LandingPage() {
               className="fade-up delay-4"
               style={{ color: "#166534", fontSize: 13, marginTop: 14 }}
             >
-              ✓ Gratis 14 hari · Tidak perlu kartu kredit · Setup 2 menit
+              ✓ Tidak perlu kartu kredit · Setup 2 menit
             </Link>
           </div>
 
@@ -2158,7 +2230,7 @@ export default function LandingPage() {
               Tidak ada biaya tersembunyi. Tidak ada kontrak jangka panjang.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-1 gap-6">
             {plans.map((p, i) => (
               <div
                 key={i}
