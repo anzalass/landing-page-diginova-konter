@@ -34,7 +34,7 @@ export const metadata: Metadata = {
       "Kelola penjualan, stok, servis HP, dan laporan keuangan kontermu dalam satu aplikasi. Lebih dari 12.000 konter aktif di 500+ kota Indonesia.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/logodiginova.jpeg",
         width: 1200,
         height: 630,
         alt: "BukuKonter — Aplikasi Pencatatan Penjualan Konter",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "BukuKonter — Aplikasi Kasir & Servis HP untuk Konter",
     description:
       "Kelola penjualan, stok, servis HP, dan laporan keuangan kontermu dalam satu aplikasi.",
-    images: ["/og-image.png"],
+    images: ["/logodiginova.jpeg"],
     creator: "@bukukonter",
   },
   robots: {
@@ -61,9 +61,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/logodiginova.jpeg",
+    shortcut: "/logodiginova.jpeg",
+    apple: "/logodiginova.jpeg",
   },
   manifest: "/site.webmanifest",
   category: "technology",
